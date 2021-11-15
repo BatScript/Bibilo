@@ -1,0 +1,21 @@
+<%- include('header'); -%>
+<h1 class="text-center">Login</h1>
+<div class="forms">
+    <form action="/login" method="POST">
+        <table>
+            <tr>
+                <td><label for="email">Email: </label></td>
+                <td><input name="username" type="email"></td>
+            </tr>
+            <tr>
+                <td><label for="password">Password: </label></td>
+                <td><input name="password" type="password"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button class="btn btn-primary" type="submit">Submit</button></td>
+            </tr>
+        </table>
+    </form>
+</div>
+<p><%= message %></p>
+<p class="text-center"><a href="/signup">join-us</a></p>

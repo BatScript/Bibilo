@@ -1,0 +1,124 @@
+<%- include('header'); -%>
+<a href="/logout">Logout</a>
+<a href="/cart">cart</a>
+<h1 class="text-center">Sup <%= name %></h1>
+<div class="container">
+  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+        aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+        aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+        aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active banner">
+        <div>
+          <img src="" alt="">
+        </div>
+        <div>
+          <h4>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit tempora voluptatibus sed cupiditate,
+            itaque laudantium minus vero quisquam libero rerum tempore, aperiam harum, natus sapiente nulla pariatur
+            maxime omnis unde.</h4>
+          <button class="btn">Yee yee</button>
+        </div>
+      </div>
+      <div class="carousel-item banner">
+        <div>
+          <img src="" alt="">
+        </div>
+        <div>
+          <h4>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit tempora voluptatibus sed cupiditate,
+            itaque laudantium minus vero quisquam libero rerum tempore, aperiam harum, natus sapiente nulla pariatur
+            maxime omnis unde.</h4>
+          <button class="btn b">Yee yee</button>
+        </div>
+      </div>
+      <div class="carousel-item banner">
+        <div>
+          <img src="" alt="">
+        </div>
+        <div>
+          <h4>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit tempora voluptatibus sed cupiditate,
+            itaque laudantium minus vero quisquam libero rerum tempore, aperiam harum, natus sapiente nulla pariatur
+            maxime omnis unde.</h4>
+          <button type="button" class="btn btn-danger">Yee yee</button>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+      data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+      data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+  <div class="bestSellers">
+    <h1>Bestsellers</h1>
+    <div class="bsbooks">
+      <div>
+        <img src="" alt="">
+        <p>lalalalalalalalalal</p>
+      </div>
+      <div>
+        <img src="" alt="">
+        <p>lalalalalalalalalal</p>
+      </div>
+      <div>
+        <img src="" alt="">
+        <p>lalalalalalalalalal</p>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Features</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Pricing</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="categories">
+      <% products.forEach((items) => { %>
+      <div class="hovashow">
+        <img class="catimg" src="<%= items.image %>" alt="">
+        <div id="catext">
+          <b>
+            <p><%= items.name %></p>
+          </b>
+          <p><%= items.author %></p>
+          <p><%= items.rating %></p>
+          <form action="/addtocart/<%= items._id %>" method="post">
+            <button data-book="<%= items._id %>" name="cartButton" class="btn btn-danger">ADD</button>
+          </form>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+</div>

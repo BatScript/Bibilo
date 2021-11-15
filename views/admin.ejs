@@ -1,0 +1,44 @@
+<%- include('header'); -%>
+<h1 class="text-center">Welcome admin</h1>
+
+<div class="forms">
+    <form method="post">
+        <table>
+            <tr>
+                <td><label for="imagelink">Image Link: </label></td>
+                <td><input name="imagelink" type="text"></td>
+            </tr>
+            <tr>
+                <td><label for="bookname">Book Name: </label></td>
+                <td><input name="bookname" type="text"></td>
+            </tr>
+            <tr>
+                <td><label for="author">Author Name: </label></td>
+                <td><input name="author" type="text"></td>
+            </tr>
+            <tr>
+                <td><label for="rating">Rating out of 5: </label></td>
+                <td><input name="rating" type="text"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button class="btn btn-primary" type="submit">Submit</button></td>
+            </tr>
+        </table>
+    </form>
+    <p><a href="/landing">Home</a></p>
+</div>
+
+<div>
+    <h1 class="text-center">Delete Listings</h1>
+    <form action="/delete" method="post">
+        <ul class="lists">
+            <% bookList.forEach((items) => { %>
+            <div class="flexx">
+                <li class="bands"><%= items.name %></li>
+                <input name="checkbox" type="checkbox" value="<%= items._id %>" onChange="this.form.submit()">
+                <a href="/adminpanel/editlists">edit</a>
+            </div>
+            <% }) %>
+        </ul>
+    </form>
+</div>

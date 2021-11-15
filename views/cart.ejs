@@ -1,0 +1,15 @@
+<%- include('header'); -%>
+<div>
+    <h1 class="text-center">Check the heck outta here!</h1>
+    <ul class="lists">
+        
+            <% cartBookArray.forEach((data) => { %>
+            <li><p><%= data.name %> &nbsp; &nbsp;</p></li>
+            <% }) %>
+            
+            <% cartQty.forEach((datatwo) => { %>
+                <p><%= datatwo.qty %></p>
+            <% }) %>
+        
+    </ul>
+</div>
