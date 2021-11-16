@@ -151,7 +151,7 @@ app.get("/cart", (req, res) => {
                 };
 
                 bookArray.push(foundBookData);
-                
+
                 var f = BookId.cartItems;
             }
 
@@ -193,18 +193,17 @@ app.post('/addtocart/:id', (req, res) => {
                 console.log(err);
             } else {
                 var shortCut = kaamKaArray.find(val => val.name === bookid)
-                if(shortCut){
+                if (shortCut) {
                     shortCut.qty += 1
                     foundStuff.save();
-                }
-                else{
+                } else {
                     var data = {
                         name: bookid,
                         qty: 1
                     };
                     kaamKaArray.push(data);
                     foundStuff.save();
-                }                             
+                }
             }
             res.redirect('/cart');
         });
@@ -313,10 +312,52 @@ app.post('/login', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-    res.render('login', {
-        message: ""
-    });
+    if(req.isAuthenticated()){
+        res.redirect('/landing')
+    }
+    else{
+        res.render('login', {
+            message: ""
+        });
+    }
 });
+
+app.post('/adminpanel/editlists/:item', (req, res) => {
+    if (req.isAuthenticated() && req.user.isAdmin) {
+        
+        productData.findOne({
+            _id: req.params.item
+        }, (err, foundListings) => {
+            res.render("edit.ejs", {
+                book: foundListings
+            });
+        })
+    }
+})
+
+app.post('/adminpanel/edited/:id', (req,res) => {
+    if(req.isAuthenticated() && req.user.isAdmin){
+        var data ={
+            image: req.body.image,
+            title: req.body.title,
+            author: req.body.author,
+            rating: req.body.rating,
+            price: req.body.price,
+            id: req.params.id
+        }
+
+        productData.findOne({_id: data.id}, (err, updateData) => {
+            updateData.image = data.image;
+            updateData.name = data.title;
+            updateData.author = data.author;
+            updateData.rating = data.rating;
+            updateData.price = data.price;
+            updateData.save();
+        });
+
+        res.redirect('/landing');
+    }
+})
 
 //Listens to my requests and implement responses on server with the given port no.
 app.listen(3000 || process.env.PORT, () => {

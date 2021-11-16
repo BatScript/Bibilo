@@ -30,15 +30,18 @@
 
 <div>
     <h1 class="text-center">Delete Listings</h1>
-    <form action="/delete" method="post">
         <ul class="lists">
             <% bookList.forEach((items) => { %>
             <div class="flexx">
                 <li class="bands"><%= items.name %></li>
-                <input name="checkbox" type="checkbox" value="<%= items._id %>" onChange="this.form.submit()">
-                <a href="/adminpanel/editlists">edit</a>
+                <form action="/delete" method="post">
+                    <input name="checkbox" type="checkbox" value="<%= items._id %>" onChange="this.form.submit()">
+                </form>
+                <form action="/adminpanel/editlists/<%= items._id %>" method="post">
+                    <button class="btn btn-primary">edit</button>
+                </form>
             </div>
             <% }) %>
         </ul>
-    </form>
+    
 </div>
