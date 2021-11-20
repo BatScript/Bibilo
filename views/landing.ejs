@@ -113,6 +113,7 @@
           </b>
           <p><%= items.author %></p>
           <p><%= items.rating %></p>
+          <p>$<%= items.price %></p>
           <form action="/addtocart/<%= items._id %>" method="post">
             <button data-book="<%= items._id %>" name="cartButton" class="btn btn-danger">ADD</button>
           </form>
