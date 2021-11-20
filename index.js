@@ -1,25 +1,34 @@
 //INT 221 Final Project
 
+// Import the functions you need from the SDKs you need
+const initializeApp = require("firebase/app");
+const getAnalytics = require("firebase/analytics");
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
 const LocalStrategy = require('passport-local').Strategy;
 
 const bcrypt = require('bcrypt');
 
 const express = require('express'); // we started with express to use http verbs and view engine(ejs)
-app = express();
+const router= express();
 
-app.use(express.static(__dirname + '/Public')); // This will help us to fetch static files like images ans styles
+router.use(express.static(__dirname + '/Public')); // This will help us to fetch static files like images ans styles
 
-app.set('view engine', 'ejs'); //With this we are initiating our Template engine and we can use it in our driver file now.
+router.set('view engine', 'ejs'); //With this we are initiating our Template engine and we can use it in our driver file now.
 
 // They will help us with form data reading after user submits it
 const bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({
+router.use(bodyParser.urlencoded({
     extended: true
 }));
 
 //Mongoose will help us to write shorter version of mongodb code snippets
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/test');
+mongoose.connect('mongodb+srv://bibilo:mzZo0_299@cluster0.9mefx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
 
 //passportjs extensions:
 const passport = require('passport'); // Authenticator extension
@@ -62,15 +71,15 @@ userSchema.plugin(passportLocalMongoose);
 const userCredentials = mongoose.model('userCredentials', userSchema);
 
 // Cookie initialised
-app.use(session({
+router.use(session({
     secret: "cats",
     resave: false,
     saveUninitialized: false
 }));
 
 //Passport initialization with session
-app.use(passport.initialize());
-app.use(passport.session());
+router.use(passport.initialize());
+router.use(passport.session());
 
 
 // A model (a folder basically) where we store our data in the database
@@ -91,14 +100,14 @@ passport.deserializeUser(userCredentials.deserializeUser());
 
 
 //signup route handle
-app.get("/signup", (req, res) => {
+router.get("/signup", (req, res) => {
     res.render("signup", {
         message: ""
     });
 })
 
 //landing route with authorization check
-app.get("/landing", (req, res) => {
+router.get("/landing", (req, res) => {
 
     productData.find({}, (err, foundItems) => {
 
@@ -109,10 +118,12 @@ app.get("/landing", (req, res) => {
             userData.findOne({
                 email: name
             }, (err, foundItem) => {
+                const cartLength = foundItem.cartItems.length
                 const userDisplayName = foundItem.username;
                 res.render("landing", {
                     name: userDisplayName,
-                    products: books
+                    products: books, 
+                    length: cartLength
                 });
             })
 
@@ -126,12 +137,12 @@ app.get("/landing", (req, res) => {
 });
 
 //logout with session end
-app.get("/logout", (req, res) => {
+router.get("/logout", (req, res) => {
     req.logout();
     res.redirect("/");
 });
 
-app.get("/cart", (req, res) => {
+router.get("/cart", (req, res) => {
     if (req.isAuthenticated()) {
         const findcartdata = req.user.username;
 
@@ -165,7 +176,7 @@ app.get("/cart", (req, res) => {
     }
 })
 
-app.get('/adminpanel', (req, res) => {
+router.get('/adminpanel', (req, res) => {
 
     productData.find((err, booklist) => {
 
@@ -180,7 +191,7 @@ app.get('/adminpanel', (req, res) => {
     });
 });
 
-app.post('/addtocart/:id', (req, res) => {
+router.post('/addtocart/:id', (req, res) => {
     const bookid = req.params.id;
 
     if (req.isAuthenticated()) {
@@ -212,19 +223,20 @@ app.post('/addtocart/:id', (req, res) => {
     }
 })
 
-app.post('/adminpanel', (req, res) => {
+router.post('/adminpanel', (req, res) => {
     const newBook = new productData({
         image: req.body.imagelink,
         name: req.body.bookname,
         author: req.body.author,
-        rating: req.body.rating
+        rating: req.body.rating,
+        price: req.body.price
     });
 
     newBook.save();
     res.redirect('/adminpanel')
 })
 
-app.post('/delete', (req, res) => {
+router.post('/delete', (req, res) => {
     const checkedItem = req.body.checkbox;
     productData.findByIdAndRemove(checkedItem, (err) => {
         if (err) {
@@ -236,7 +248,7 @@ app.post('/delete', (req, res) => {
 })
 
 //Signup post method with registering the credientials in db using passport
-app.post('/signup', (req, res) => {
+router.post('/signup', (req, res) => {
 
     var a = req.body.password;
     var b = req.body.cpassword;
@@ -272,13 +284,13 @@ app.post('/signup', (req, res) => {
     });
 });
 
-app.get("/login", (req, res) => {
+router.get("/login", (req, res) => {
     res.render("login", {
         message: ""
     });
 })
 
-app.post('/login', (req, res) => {
+router.post('/login', (req, res) => {
     userCredentials.findOne({
         username: req.body.username
     }, function (err, foundUser) {
@@ -311,7 +323,7 @@ app.post('/login', (req, res) => {
     });
 })
 
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
     if(req.isAuthenticated()){
         res.redirect('/landing')
     }
@@ -322,7 +334,7 @@ app.get('/', (req, res) => {
     }
 });
 
-app.post('/adminpanel/editlists/:item', (req, res) => {
+router.post('/adminpanel/editlists/:item', (req, res) => {
     if (req.isAuthenticated() && req.user.isAdmin) {
         
         productData.findOne({
@@ -335,7 +347,7 @@ app.post('/adminpanel/editlists/:item', (req, res) => {
     }
 })
 
-app.post('/adminpanel/edited/:id', (req,res) => {
+router.post('/adminpanel/edited/:id', (req,res) => {
     if(req.isAuthenticated() && req.user.isAdmin){
         var data ={
             image: req.body.image,
@@ -360,6 +372,6 @@ app.post('/adminpanel/edited/:id', (req,res) => {
 })
 
 //Listens to my requests and implement responses on server with the given port no.
-app.listen(3000 || process.env.PORT, () => {
+router.listen(3000 || process.env.PORT, () => {
     console.log("started at 3000");
 });

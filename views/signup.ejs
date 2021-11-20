@@ -1,28 +1,18 @@
 <%- include('header'); -%>
-<h1 class="text-center">Sign Up</h1>
+
 <div class="forms">
+    <img class="login-img" src="images/signup-img.jpg" alt="">
     <form action="/signup" method="POST">
-        <table>
-            <tr>
-                <td><label for="email">Email: </label></td>
-                <td><input name="username" type="email"></td>
-            </tr>
-            <tr>
-                <td><label for="password">Password: </label></td>
-                <td><input name="password" type="password" id="pass" value=""></td>
-            </tr>
-            <tr>
-                <td><label for="password">Confirm Password: </label></td>
-                <td><input name="cpassword" type="password" id="cpass" value=""></td>
-            </tr>
-            <tr>
-                <td><label for="username">Username: </label></td>
-                <td><input name="name" type="text" id="cpass" value=""></td>
-            </tr>
-            <tr>
-                <td colspan="2"><button class="btn btn-primary" type="submit">Submit</button></td>
-            </tr>
-        </table>  
-    </form> 
+        <div class="inputs">
+            <h1 class="text-center">Sign Up</h1>
+            <input placeholder="Email" name="username" type="email">         
+            <input placeholder="Password" name="password" type="password" id="pass" value="">            
+            <input placeholder="Confirm Password" name="cpassword" type="password" id="cpass" value="">           
+            <input placeholder="Name" name="name" type="text" id="cpass" value="">
+            <button class="btn btn-primary" type="submit">Submit</button>
+            <a href="/login">Login</a>
+        </div>
+    </form>
 </div>
 <p><%= message %></p>
+<%- include('footer'); -%>

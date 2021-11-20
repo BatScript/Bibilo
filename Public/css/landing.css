@@ -1,0 +1,142 @@
+.container{
+    overflow: auto;
+}
+
+.booknav{
+    background-color: #d63691e4;
+    border-radius: 30px;
+    margin-top: 3%;
+    margin-bottom: 5% !important;
+}
+
+.bestSellers{
+    margin-top: 5% !important;
+}
+
+.bsbooks{
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.bsbooks > div{
+    display: flex;
+    padding: 2%;
+}
+
+.banner{
+    display: flex;
+}
+
+.categories{
+    display: grid;
+    grid-template-columns: 60vh 60vh 60vh;
+    row-gap: 5%;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.catimg{
+    width: 50%;
+    object-fit: cover;
+    margin-right: 5%;
+}
+
+ul{
+    width: 100%;
+    width: 50%;
+    margin: auto;
+}
+
+.flexx{
+    border-radius: 10px;
+    margin: 5%;
+    display: flex;
+    align-items: center;
+    background-color: mediumseagreen;
+    height: 50px;
+}
+
+.hovashow{
+    display: flex;
+    margin: auto;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+    background-color: transparent !important;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #c13283d3;
+    border-radius: 20px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #c1328369; 
+  }
+
+.carousel{
+    margin: auto;
+    width: 70%;
+}
+
+.carousel-inner{
+    display: block;
+    margin: auto !important;
+}
+
+.banner-img{
+    width: 100%;
+    margin: auto;
+}
+
+#l{
+    float: left;
+}
+
+.kart{
+    float: right;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1%;
+}
+
+.bookgallery{
+    width: 90%;
+    margin: auto;
+}
+
+@media only screen and (max-width: 600px){
+    .categories{
+        grid-template-columns: 60vh;
+    }
+
+    .hovashow{
+        width: 60%;
+    }
+
+    .catimg{
+        width: 50%;
+    }
+
+    .bsbooks{
+        flex-direction: column;
+    } 
+
+    .carousel{
+        display: none;
+    }
+}
