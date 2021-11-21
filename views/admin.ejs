@@ -1,8 +1,11 @@
 <%- include('header'); -%>
 <h1 class="text-center">Welcome admin</h1>
+<p class="text-center"><a href="/landing">Home</a></p>
 
-<div class="forms">
+<div class="forms newbook">
+
     <form method="post">
+        <h1 class="text-center">Add new Book</h1>
         <table>
             <tr>
                 <td><label for="imagelink">Image Link: </label></td>
@@ -29,24 +32,33 @@
             </tr>
         </table>
     </form>
-    <p><a href="/landing">Home</a></p>
+    <div class="editlistdiv">
+        <h1 class="text-center">Delete Listings</h1>
+        
+            <table class="edititems">
+                <% bookList.forEach((items) => { %>
+                <tr>
+                    <td>
+                            <p><%= items.name %></p>
+                        </td>
+                        <td>
+                            <form action="/delete" method="post">
+                                <input class="cb" name="checkbox" type="checkbox" value="<%= items._id %>"
+                                    onChange="this.form.submit()">
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/adminpanel/editlists/<%= items._id %>" method="post">
+                                <button class="btn btn-primary">edit</button>
+                            </form>
+                        </td>
+
+                </tr>
+                <% }) %>
+            </table>
+
+    </div>
 </div>
 
-<div>
-    <h1 class="text-center">Delete Listings</h1>
-        <ul class="lists">
-            <% bookList.forEach((items) => { %>
-            <div class="flexx">
-                <li class="bands"><%= items.name %></li>
-                <form action="/delete" method="post">
-                    <input name="checkbox" type="checkbox" value="<%= items._id %>" onChange="this.form.submit()">
-                </form>
-                <form action="/adminpanel/editlists/<%= items._id %>" method="post">
-                    <button class="btn btn-primary">edit</button>
-                </form>
-            </div>
-            <% }) %>
-        </ul>
-    
-</div>
+
 <%- include('footer'); -%>

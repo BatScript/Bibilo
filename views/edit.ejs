@@ -1,14 +1,16 @@
 <%- include('header'); -%>
-<div>
-    <h1 class="text-center">Edit Listings</h1>
-    <img class="catimg" src="<%=book.image%>" alt="">
-    <form class="forms" action="/adminpanel/edited/<%=book._id%>" method="post">
-        <label for="image">Image</label><input name="image" type="text">
-        <label for="title">Title</label> <input type="text" name="title" id="" placeholder="<%=book.name%>">
-        <label for="author">Author</label><input type="text" name="author" id="" placeholder="<%=book.author%>">
-        <label for="rating">Rating</label><input type="text" name="rating" id="" placeholder="<%=book.rating%>">
-        <label for="price">Price</label><input name="price" type="text" placeholder="<%=book.price%>"><br>
-        <button data-book="<%=book.id%>" class="btn btn-primary">Change</button>
+<h1 class="text-center">Edit Listings</h1>
+<div class="container forms forms-edit">
+    <img class="editimg" src="<%=book.image%>" alt="">
+    <form action="/adminpanel/edited/<%=book._id%>" method="post">
+        <div class="inputs">
+            <label for="image">Image</label><input name="image" type="text" value="<%=book.image%>">
+            <label for="title">Title</label> <input type="text" name="title" id="" value="<%=book.name%>">
+            <label for="author">Author</label><input type="text" name="author" id="" value="<%=book.author%>">
+            <label for="rating">Rating</label><input type="text" name="rating" id="" value="<%=book.rating%>">
+            <label for="price">Price</label><input name="price" type="text" value="<%=book.price%>"><br>
+            <button data-book="<%=book.id%>" class="btn btn-primary">Change</button>
+        </div>
     </form>
 </div>
 <%- include('footer'); -%>

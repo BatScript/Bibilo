@@ -1,5 +1,6 @@
 .container{
     overflow: auto;
+    overflow-x: hidden;
 }
 
 .booknav{
@@ -46,21 +47,6 @@
     margin-right: 5%;
 }
 
-ul{
-    width: 100%;
-    width: 50%;
-    margin: auto;
-}
-
-.flexx{
-    border-radius: 10px;
-    margin: 5%;
-    display: flex;
-    align-items: center;
-    background-color: mediumseagreen;
-    height: 50px;
-}
-
 .hovashow{
     display: flex;
     margin: auto;
@@ -89,7 +75,7 @@ ul{
 
 .carousel{
     margin: auto;
-    width: 70%;
+    width: 90%;
 }
 
 .carousel-inner{
@@ -102,8 +88,8 @@ ul{
     margin: auto;
 }
 
-#l{
-    float: left;
+#r{
+    font-size: 1.25rem !important;
 }
 
 .kart{

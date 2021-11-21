@@ -1,0 +1,44 @@
+.dataname{
+    float: left;
+}
+
+.dataname > li > p{
+    padding: 2px;
+}
+
+.qty{
+    float: right;
+}
+
+.dataname{
+    list-style-type: none;
+}
+
+.buttoncart{
+    display: flex;
+    padding: 3%;
+}
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    font-size: 12px !important;
+    line-height: 1.428571429;
+    border-radius: 15px !important;
+  }
+
+  .buttoncart > p{
+      padding: 0 5px 0 5px;
+  }
+
+  .cartlist{
+      margin-top: 5%;
+      width:20% !important;
+  }
+
+  @media only screen and (max-width: 600px){
+      .cartlist{
+          width: 100% !important;
+      }
+  }

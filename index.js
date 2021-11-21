@@ -28,7 +28,8 @@ router.use(bodyParser.urlencoded({
 
 //Mongoose will help us to write shorter version of mongodb code snippets
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://bibilo:mzZo0_299@cluster0.9mefx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
+// mongoose.connect('mongodb+srv://bibilo:mzZo0_299@cluster0.9mefx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
+mongoose.connect('mongodb://localhost:27017/test');
 
 //passportjs extensions:
 const passport = require('passport'); // Authenticator extension
@@ -164,9 +165,13 @@ router.get("/cart", (req, res) => {
                 bookArray.push(foundBookData);
 
                 var f = BookId.cartItems;
+                var s1 = bookArray.length;
+                var s2 = f.length;
             }
 
             res.render("cart", {
+                s1: s1,
+                s2: s2,
                 cartBookArray: bookArray,
                 cartQty: f
             })
@@ -371,7 +376,11 @@ router.post('/adminpanel/edited/:id', (req,res) => {
     }
 })
 
+router.get('*', function(req, res){
+    res.send('what???', 404);
+  });
+
 //Listens to my requests and implement responses on server with the given port no.
-router.listen(process.env.PORT, () => {
+router.listen(process.env.PORT || 3000, () => {
     console.log("started at 3000");
 });

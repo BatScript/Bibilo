@@ -1,16 +1,24 @@
 <%- include('header'); -%>
-<div>
-    <h1 class="text-center">Check the heck outta here!</h1>
-    <ul class="lists">
-        
-            <% cartBookArray.forEach((data) => { %>
-            <li><p><%= data.name %> &nbsp; &nbsp;</p></li>
-            <% }) %>
-            
-            <% cartQty.forEach((datatwo) => { %>
-                <p><%= datatwo.qty %></p>
-            <% }) %>
-        
-    </ul>
+<h1 class="text-center">Check the heck outta here!</h1>
+<div class="container cartlist">
+
+        <div class="dataname">
+            <% for(i = 0; i < s1; i++) { %>
+            <li>
+                <p><%= cartBookArray[i].name %></p>
+            </li>
+            <% } %>
+        </div>
+
+        <div class="qty">
+            <% for(i = 0; i < s1; i++) { %>
+            <div class="buttoncart">
+                <button class="btn btn-primary btn-circle addsub"><p>-</p></button>
+                <p><%= cartQty[i].qty %></p>
+                <button class="btn btn-primary btn-circle addsub"><p>+</p></button>
+                
+            </div>
+            <% } %>
+        </div>
+
 </div>
-<%- include('footer'); -%>
