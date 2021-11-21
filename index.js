@@ -28,7 +28,7 @@ router.use(bodyParser.urlencoded({
 
 //Mongoose will help us to write shorter version of mongodb code snippets
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://bibilo:mzZo0_299@cluster0.9mefx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://bibilo:mzZo0_299@cluster0.9mefx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
 
 //passportjs extensions:
 const passport = require('passport'); // Authenticator extension
