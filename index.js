@@ -372,6 +372,6 @@ router.post('/adminpanel/edited/:id', (req,res) => {
 })
 
 //Listens to my requests and implement responses on server with the given port no.
-router.listen(3000 || process.env.PORT, () => {
+router.listen(process.env.PORT, () => {
     console.log("started at 3000");
 });
