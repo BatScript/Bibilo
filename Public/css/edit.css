@@ -1,7 +1,14 @@
 .editimg{
     width: 40% !important;
+    margin: auto;
 }
 
 .forms-edit{
     width:50% !important;
 }
+
+@media only screen and (max-width: 600px){
+    .forms-edit{
+        width:100% !important;
+}
+    }
