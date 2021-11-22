@@ -14,7 +14,13 @@
     list-style-type: none;
 }
 
-.buttoncart{
+.dataname {
+    width: 80%;
+    display: flex;
+    padding: 5%;
+}
+
+.buttoncart>form{
     display: flex;
     padding: 3%;
 }
@@ -28,13 +34,26 @@
     border-radius: 15px !important;
   }
 
-  .buttoncart > p{
-      padding: 0 5px 0 5px;
+  .buttoncart > form > p{
+      padding: 0 10px 0 10px;
   }
 
   .cartlist{
+      display: flex;
       margin-top: 5%;
-      width:20% !important;
+      width:40% !important;
+  }
+
+  .cartval{
+      display: flex;
+  }
+
+  .money{
+      margin-left: 50px;
+  }
+
+  .cartbookimage{
+      width: 30%;
   }
 
   @media only screen and (max-width: 600px){

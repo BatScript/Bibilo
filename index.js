@@ -28,13 +28,14 @@ router.use(bodyParser.urlencoded({
 
 //Mongoose will help us to write shorter version of mongodb code snippets
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://bibilo:mzZo0_299@cluster0.9mefx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
-// mongoose.connect('mongodb://localhost:27017/test');
+// mongoose.connect('mongodb+srv://bibilo:mzZo0_299@cluster0.9mefx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
+mongoose.connect('mongodb://localhost:27017/test');
 
 //passportjs extensions:
 const passport = require('passport'); // Authenticator extension
 const session = require('express-session'); // Session ID is saved in cookie using this
 const passportLocalMongoose = require('passport-local-mongoose'); //simplifies login/signup with mongoose
+const { Router } = require("express");
 
 const userDataSchema = new mongoose.Schema({
     email: String,
@@ -43,7 +44,8 @@ const userDataSchema = new mongoose.Schema({
         name: String,
         qty: {
             type: Number,
-            default: 0
+            default: 0,
+            min: [0, 'Cant delete more']
         }
     }]
 })
@@ -179,6 +181,23 @@ router.get("/cart", (req, res) => {
     } else {
         res.redirect("/login");
     }
+});
+
+router.post("/cart/:id", (req, res) =>{
+    const id = req.params.id;
+    const change = req.body.indec;
+    const usermail = req.user.username;
+    userData.findOne({email: usermail}, (err, changeval) => {
+        if(change == "decrement"){
+                changeval.cartItems.find(val => val.name === id).qty-=1;
+                changeval.save();
+        }
+        if(change == "increment"){
+            changeval.cartItems.find(val => val.name === id).qty+=1;
+            changeval.save();
+    }
+    })
+    res.redirect("/cart");
 })
 
 router.get('/adminpanel', (req, res) => {
@@ -377,7 +396,7 @@ router.post('/adminpanel/edited/:id', (req,res) => {
 })
 
 router.get('*', function(req, res){
-    res.send('what???', 404);
+    res.render("notfound");
   });
 
 //Listens to my requests and implement responses on server with the given port no.

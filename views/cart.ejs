@@ -1,24 +1,46 @@
 <%- include('header'); -%>
+
 <h1 class="text-center">Check the heck outta here!</h1>
 <div class="container cartlist">
 
-        <div class="dataname">
-            <% for(i = 0; i < s1; i++) { %>
-            <li>
-                <p><%= cartBookArray[i].name %></p>
-            </li>
-            <% } %>
-        </div>
+    <table>
+        <% for(i = 0; i < s1; i++) { %>
+        <tr>
+            <td>
+                <div class="dataname">
+                    <img class="cartbookimage" src="<%= cartBookArray[i].image %>" alt="">
+                    <p><%= cartBookArray[i].name %></p>
+                </div>
+            </td>
+            <td>
+                <div class="qty">
+                    <div class="cartval">
+                        <div class="buttoncart">
+                            <form onsubmit="validation()" method="post" action="/cart/<%= cartBookArray[i]._id %>">
+                                <button name="indec" value="decrement" class="btn btn-primary btn-circle addsub">
+                                    <p>-</p>
+                                </button>
+                                <p><%= cartQty[i].qty %></p>
+                                <button name="indec" value="increment" class="btn btn-primary btn-circle addsub">
+                                    <p>+</p>
+                                </button>
+                            </form>
+                        </div>
+                        
+                        <div class="money">
+                            <p>for ₹<%=cartBookArray[i].price * cartQty[i].qty%></p>
+                        </div>
+                    </div>
 
-        <div class="qty">
-            <% for(i = 0; i < s1; i++) { %>
-            <div class="buttoncart">
-                <button class="btn btn-primary btn-circle addsub"><p>-</p></button>
-                <p><%= cartQty[i].qty %></p>
-                <button class="btn btn-primary btn-circle addsub"><p>+</p></button>
-                
-            </div>
-            <% } %>
-        </div>
-
+                </div>
+            </td>
+        </tr>
+        <% } %>
+    </table>
 </div>
+<h1 class="text-center">Total: </h1>
+
+<p class="text-center"><a href="/landing">Homepage</a></p>
+
+
+<%- include('footer'); -%>
