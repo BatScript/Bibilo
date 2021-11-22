@@ -169,13 +169,18 @@ router.get("/cart", (req, res) => {
                 var f = BookId.cartItems;
                 var s1 = bookArray.length;
                 var s2 = f.length;
+                var sum = 0;
+                for(i = 0 ; i < s1; i++){
+                    sum += bookArray[i].price * f[i].qty;
+                }
             }
 
             res.render("cart", {
                 s1: s1,
                 s2: s2,
                 cartBookArray: bookArray,
-                cartQty: f
+                cartQty: f,
+                total: sum
             })
         });
     } else {
