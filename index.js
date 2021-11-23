@@ -15,7 +15,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 
 const express = require('express'); // we started with express to use http verbs and view engine(ejs)
-const router= express();
+const router = express();
 
 router.use(express.static(__dirname + '/Public')); // This will help us to fetch static files like images ans styles
 
@@ -36,7 +36,9 @@ mongoose.connect('mongodb+srv://bibilo:' + process.env.MONGO_PASSWORD + '@cluste
 const passport = require('passport'); // Authenticator extension
 const session = require('express-session'); // Session ID is saved in cookie using this
 const passportLocalMongoose = require('passport-local-mongoose'); //simplifies login/signup with mongoose
-const { Router } = require("express");
+const {
+    Router
+} = require("express");
 
 const userDataSchema = new mongoose.Schema({
     email: String,
@@ -126,7 +128,7 @@ router.get("/landing", (req, res) => {
                 const userDisplayName = foundItem.username;
                 res.render("landing", {
                     name: userDisplayName,
-                    products: books, 
+                    products: books,
                     length: cartLength
                 });
             })
@@ -171,7 +173,7 @@ router.get("/cart", (req, res) => {
                 var s1 = bookArray.length;
                 var s2 = f.length;
                 var sum = 0;
-                for(i = 0 ; i < s1; i++){
+                for (i = 0; i < s1; i++) {
                     sum += bookArray[i].price * f[i].qty;
                 }
             }
@@ -189,19 +191,31 @@ router.get("/cart", (req, res) => {
     }
 });
 
-router.post("/cart/:id", (req, res) =>{
+router.post("/cart/:id", (req, res) => {
     const id = req.params.id;
     const change = req.body.indec;
     const usermail = req.user.username;
-    userData.findOne({email: usermail}, (err, changeval) => {
-        if(change == "decrement"){
-                changeval.cartItems.find(val => val.name === id).qty-=1;
+    userData.findOne({
+        email: usermail
+    }, (err, changeval) => {
+        if (err) {
+            console.log(err);
+            res.redirect('/cart');
+        } else {
+            if (change == "decrement") {
+                changeval.cartItems.find(val => val.name === id).qty -= 1;
                 changeval.save();
+            }
+            if (change == "increment") {
+                changeval.cartItems.find(val => val.name === id).qty += 1;
+                changeval.save();
+            }
+            if(change == "del") {
+                changeval.cartItems.splice(changeval.cartItems.findIndex(val => val.name === id) , 1);
+                changeval.save();
+            }
+
         }
-        if(change == "increment"){
-            changeval.cartItems.find(val => val.name === id).qty+=1;
-            changeval.save();
-    }
     })
     res.redirect("/cart");
 })
@@ -354,10 +368,9 @@ router.post('/login', (req, res) => {
 })
 
 router.get('/', (req, res) => {
-    if(req.isAuthenticated()){
+    if (req.isAuthenticated()) {
         res.redirect('/landing')
-    }
-    else{
+    } else {
         res.render('login', {
             message: ""
         });
@@ -366,7 +379,7 @@ router.get('/', (req, res) => {
 
 router.post('/adminpanel/editlists/:item', (req, res) => {
     if (req.isAuthenticated() && req.user.isAdmin) {
-        
+
         productData.findOne({
             _id: req.params.item
         }, (err, foundListings) => {
@@ -377,9 +390,9 @@ router.post('/adminpanel/editlists/:item', (req, res) => {
     }
 })
 
-router.post('/adminpanel/edited/:id', (req,res) => {
-    if(req.isAuthenticated() && req.user.isAdmin){
-        var data ={
+router.post('/adminpanel/edited/:id', (req, res) => {
+    if (req.isAuthenticated() && req.user.isAdmin) {
+        var data = {
             image: req.body.image,
             title: req.body.title,
             author: req.body.author,
@@ -388,7 +401,9 @@ router.post('/adminpanel/edited/:id', (req,res) => {
             id: req.params.id
         }
 
-        productData.findOne({_id: data.id}, (err, updateData) => {
+        productData.findOne({
+            _id: data.id
+        }, (err, updateData) => {
             updateData.image = data.image;
             updateData.name = data.title;
             updateData.author = data.author;
@@ -401,9 +416,9 @@ router.post('/adminpanel/edited/:id', (req,res) => {
     }
 })
 
-router.get('*', function(req, res){
+router.get('*', function (req, res) {
     res.render("notfound");
-  });
+});
 
 //Listens to my requests and implement responses on server with the given port no.
 router.listen(process.env.PORT || 3000, () => {

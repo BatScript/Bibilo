@@ -1,12 +1,18 @@
 <%- include('header'); -%>
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/landing">Home</a>
-      
-      <a id="r" href="/logout">logout</a>
-  </nav>
+        <a class="navbar-brand" href="/landing">Home</a>
 
-<h1 class="text-center">Check the heck outta here!</h1>
+        <a id="r" href="/logout">logout</a>
+</nav>
+
+<% if(total){ %>
+    <h1 class="text-center">Hey! you've got a good taste</h1>
+<% } else { %>
+    <h1 class="text-center">Wow! such desolation</h1>
+<% } %>
+
+
 <div class="container cartlist">
 
     <table>
@@ -22,7 +28,7 @@
                 <div class="qty">
                     <div class="cartval">
                         <div class="buttoncart">
-                            <form onsubmit="validation()" method="post" action="/cart/<%= cartBookArray[i]._id %>">
+                            <form class="formtwo" method="post" action="/cart/<%= cartBookArray[i]._id %>">
                                 <button name="indec" value="decrement" class="btn btn-primary btn-circle addsub">
                                     <p>-</p>
                                 </button>
@@ -30,9 +36,12 @@
                                 <button name="indec" value="increment" class="btn btn-primary btn-circle addsub">
                                     <p>+</p>
                                 </button>
+                                <button name="indec" value="del" class="btn btn-danger btn-circle addsub">
+                                    <p>X</p>
+                                </button>
                             </form>
                         </div>
-                        
+
                         <div class="money">
                             <p>for ₹<%=cartBookArray[i].price * cartQty[i].qty%></p>
                         </div>
@@ -44,7 +53,14 @@
         <% } %>
     </table>
 </div>
-<h1 class="text-center">Total: ₹<%= total %></h1>
+
+<% if(total){ %>
+    <h1 class="text-center">Total: ₹ <%= total %></h1>
+<% } else { %>
+    <h1 class="text-center display-1">😔</h1>
+<% } %>
+
+
 
 <p class="text-center"><a href="/landing">Homepage</a></p>
 

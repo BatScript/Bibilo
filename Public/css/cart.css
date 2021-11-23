@@ -20,6 +20,10 @@
     padding: 5%;
 }
 
+.dataname > p{
+    padding: 5%;
+}
+
 .buttoncart>form{
     display: flex;
     padding: 3%;
@@ -35,13 +39,13 @@
   }
 
   .buttoncart > form > p{
-      padding: 0 10px 0 10px;
+      padding: 0 10pxs;
   }
 
   .cartlist{
       display: flex;
       margin-top: 5%;
-      width:40% !important;
+      width:50% !important;
   }
 
   .cartval{
@@ -56,8 +60,31 @@
       width: 30%;
   }
 
+  .addsub{
+      margin: 0 10px !important;
+  }
+
+  .formtwo{
+      width: 100%;
+  }
+
   @media only screen and (max-width: 600px){
+      .buttoncart{
+          margin: auto;
+          float: right;
+      }
       .cartlist{
           width: 100% !important;
+          /* justify-content:center; */
+          margin: auto;
       }
+      .cartbookimage{
+       display: none;
+    }
+    .addsub{
+        margin: 0 4px !important;
+    }
+    .buttoncart > form > p{
+        padding: 0 4px;
+    }
   }
