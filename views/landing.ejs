@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
     <a class="navbar-brand" href="/logout">Logout</a>
-    
+
     <a id="r" href="/cart">cart(<%=length%>)</a>
   </div>
 </nav>
@@ -19,14 +19,14 @@
     </div>
     <div class="carousel-inner" role="listbox" style=" width:100%; height: 300px !important;">
       <div class="carousel-item active banner">
-          <img class="banner-img" src="images/banner1.png" alt="">
+        <img class="banner-img" src="images/banner1.png" alt="">
       </div>
       <div class="carousel-item banner" role="listbox" style=" width:100%; height: 300px !important;">
-          <img class="banner-img" src="images/banner2.png" alt="">
+        <img class="banner-img" src="images/banner2.png" alt="">
       </div>
       <div class="carousel-item banner" role="listbox" style=" width:100%; height: 300px !important;">
         <img class="banner-img center-block" src="images/banner3.png" alt="">
-    </div>
+      </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
       data-bs-slide="prev">
@@ -71,12 +71,11 @@
       <% products.forEach((items) => { %>
       <div class="hovashow">
         <img class="catimg" src="<%= items.image %>" alt="">
-        <div id="catext">
-          <b>
-            <p><%= items.name %></p>
-          </b>
+        <div class="catext">
+
+          <p><b><%= items.name %></b></p>
           <p><%= items.author %></p>
-          <p><%= items.rating %></p>
+          <p><%= items.rating %>/5</p>
           <p>₹<%= items.price %></p>
           <form action="/addtocart/<%= items._id %>" method="post">
             <button data-book="<%= items._id %>" name="cartButton" class="btn btn-danger">ADD</button>

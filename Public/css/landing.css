@@ -35,13 +35,11 @@ body{
     display: grid;
     grid-template-columns: 60vh 60vh 60vh;
     row-gap: 5%;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+    height: 100%;
 }
 
 .catimg{
-    width: 50%;
+    width: 200px;
     object-fit: cover;
     margin-right: 5%;
 }
@@ -91,13 +89,6 @@ body{
     font-size: 1.25rem !important;
 }
 
-.kart{
-    float: right;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 1%;
-}
 
 .bookgallery{
     width: 90%;
