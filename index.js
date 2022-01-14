@@ -23,7 +23,11 @@ router.use(
 //Mongoose will help us to write shorter version of mongodb code snippets
 const mongoose = require("mongoose");
 // mongoose.connect('mongodb+srv://bibilo:' + process.env.MONGO_PASSWORD + '@cluster0.9mefx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
-mongoose.connect("mongodb://localhost:27017/test");
+mongoose.connect(
+  "mongodb+srv://bibilo:" +
+    process.env.MONGO_PASSWORD +
+    "@cluster0.9mefx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+);
 
 //passportjs extensions:
 const passport = require("passport"); // Authenticator extension
